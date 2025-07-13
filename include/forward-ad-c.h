@@ -6,7 +6,6 @@ extern "C" {
 #endif
 
 #include <stddef.h>
-#include <stdlib.h>
 
 typedef struct {
 	double value;
