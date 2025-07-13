@@ -5,11 +5,18 @@
 extern "C" {
 #endif
 
+#include <stddef.h>
+#include <stdlib.h>
+
 typedef struct {
 	double value;
 	double *grad;
 	double **hessian; 
-} Dual;
+	size_t n;
+} DualVar;
+
+DualVar *dvar_create(size_t n);
+void dvar_free(DualVar *dvar);
 
 #ifdef __cplusplus
 }
