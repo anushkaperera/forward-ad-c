@@ -18,6 +18,8 @@ typedef struct {
 DualVar *dvar_create(size_t n);
 void dvar_free(DualVar *dvar);
 
+DualVar *dvar_add(const DualVar *a, const DualVar *b);
+
 #ifdef __cplusplus
 }
 #endif

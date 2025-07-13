@@ -30,3 +30,17 @@ void dvar_free(DualVar *dvar) {
     if (dvar->grad) free(dvar->grad);
     free(dvar);
 };
+
+DualVar *dvar_add(const DualVar *a, const DualVar *b) {
+    if (!a || !b || a->n != b->n) return NULL;
+    DualVar *r = dvar_create(a->n);
+    if (!r) return NULL;
+    r->value = a->value + b->value;
+    for (size_t i = 0; i < a->n; ++i) {
+        r->grad[i] = a->grad[i] + b->grad[i];
+        for (size_t j = 0; j < a->n; ++j) {
+            r->hessian[i][j] = a->hessian[i][j] + b->hessian[i][j];
+        }
+    }
+    return r;
+}
