@@ -20,11 +20,13 @@ DualVar *dvar_create(size_t n) {
 };
 
 void dvar_free(DualVar *dvar) {
-    if (!dvar) return;
-    for (size_t i = 0; i < dvar->n; ++i) {
-        free(dvar->hessian[i]);
+    if (!dvar) return NULL;
+    if (dvar->hessian) {
+        for (size_t i = 0; i < dvar->n; ++i) {
+            if (dvar->hessian[i]) free(dvar->hessian[i]);
+        }
+        free(dvar->hessian);
     }
-    free(dvar->hessian);
-    free(dvar->grad);
+    if (dvar->grad) free(dvar->grad);
     free(dvar);
 };
